@@ -9,9 +9,10 @@ product. It does not aim to track upstream EGM behavior exactly.
 
 ## Status
 
-Elephant and artifact templates are implemented, with offline contract checks.
-Goldfish agents, skills, commands, installation, and runtime verification are not
-implemented yet. There is no supported installation at this stage.
+Elephant, seven Goldfish agents, artifact templates, and the reviewer report
+contract are authored, with offline contract checks. Skills, commands,
+installation, and runtime verification are not implemented yet. There is no
+supported installation at this stage.
 
 The initial target is OpenCode **V2.2.5 on Linux, including WSL2**. This is a
 development baseline, not a claim of verified workflow support.

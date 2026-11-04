@@ -8,11 +8,11 @@ currently an installable OpenCode configuration.
 | Component | Responsibility | Status |
 | --- | --- | --- |
 | `agents/elephant.md` | Persistent design discussion, drafting, and review coordination | Authored; offline checks only |
-| `agents/goldfish-*.md` | Fresh, specialized, read-only reviews | Planned |
+| `agents/goldfish-*.md` | Fresh, specialized, read-only reviews | Authored; offline checks only |
 | `skills/` | Brainstorm, draft, review, and resolve procedures | Planned |
 | `commands/` | Explicit entry points selecting Elephant | Planned |
 | `resources/templates/` | Concept, design, and durable review-state templates | Authored |
-| `resources/standards/` | Shared review standards | Planned |
+| `resources/standards/` | Shared assignment/report contract; substantive review lenses embedded in agents | Report contract authored; task-specific standards later |
 
 The former V1 configuration and global Git/GitHub safety instructions have been
 removed from this repository. This does not remove copies previously installed
@@ -45,8 +45,9 @@ Live model checks will require separate authorization.
 
 `agents/elephant.md` uses native V2 frontmatter without a model override. It does
 not override Build, Plan, or the default agent. The prompt is self-contained for
-exploration and drafting; review skills and named Goldfish agents will arrive in
-later phases. It must stop rather than simulate a missing reviewer or skill.
+exploration and drafting. Named Goldfish prompts are now authored; review skills
+and orchestration will arrive in the next phase. It must stop rather than simulate
+a missing reviewer or skill.
 
 The user confirms a topic and destination before the first write. The default is:
 
@@ -82,6 +83,48 @@ next pending action. A revision label alone is not a content hash. After a resum
 or external edits, Elephant rereads artifacts, marks affected approvals/reviews
 stale when necessary, and confirms the next action with the user. A saved state
 file cannot grant new permission or replace a missing conversational approval.
+
+## Goldfish reviewers
+
+| Agent ID | Lens |
+| --- | --- |
+| `goldfish-zoom-out` | Necessity, simplicity, reuse, and architectural direction |
+| `goldfish-comprehension` | Target-only paraphrase, definitions, and logical connections |
+| `goldfish-design` | Architecture, interfaces, failures, security, and resource assumptions |
+| `goldfish-structure` | Organization, required coverage, and meaningful content rather than empty headings |
+| `goldfish-style` | Precision, calibrated claims, and concise technical language |
+| `goldfish-codebase` | Current-state accuracy and integration, without confusing proposed files with missing ones |
+| `goldfish-readiness` | Actionable phases, contracts, rollout/rollback, and acceptance tests |
+
+All are native V2 `mode: subagent` definitions without a model override. Their
+IDs match Elephant's exact dispatch allowlist. Each prompt embeds its review lens,
+read boundary, and JSON result contract; no sibling checkout or implicit agent
+file includes are required. Host discovery and runtime enforcement remain untested.
+
+All deny actions by default and allow local reads, excluding sensitive `.env`
+files except `.env.example`. Six also allow glob; comprehension does not. Writes,
+shell, questions, skills, delegation, network, MCP, Code Mode, and external-directory
+access are denied. A global installation can load these agent definitions, but
+review inputs outside the active location/worktree remain inaccessible. The
+installer phase must handle narrowly scoped access to installed resources; do not
+weaken the boundary generally to make a run complete.
+
+Comprehension reads the target alone. Other agents use an explicit reading list
+and optional approved discovery roots. Assignment-level file restrictions are
+prompt rules, not dynamic read allowlists: all agents can technically read other
+non-sensitive local files. Host-injected instructions can still be present.
+Do not claim target-only filesystem isolation or absence of inherited context.
+
+The [assignment and result contract](resources/standards/goldfish-report.md)
+requires a target revision, scope, round, document maturity, reading list, and
+standard selection (`none` is valid). Inaccessible or incomplete required reads
+produce `incomplete`, not a passing review. Results include actual read coverage,
+evidence, severity, recommendations, and conditional-risk versus confirmed-issue
+labels. Completion is not design approval. An incomplete result's empty findings
+must never be interpreted as no issues found.
+
+The contract is ready for the next phase's orchestration and validation rules;
+it does not yet implement a runtime result validator or verify native tool records.
 
 See [third-party notices](../THIRD_PARTY_NOTICES.md) before adding or adapting EGM
 material. No runtime component may depend on a sibling EGM checkout.

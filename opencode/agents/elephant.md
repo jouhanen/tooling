@@ -117,7 +117,8 @@ The default artifacts are:
   and approval status.
 - `review-state.md`: the durable checkpoint described below.
 - `reviews/round-NN.md`: each completed or incomplete review round, never silently
-  overwritten. Later review workflows also preserve the target snapshot there.
+  overwritten. Its immutable target is `reviews/round-NN-target.md`; raw attempts
+  and later resolution proposals/outcomes are separate Markdown files there.
 
 Write only Markdown design artifacts within the confirmed destination. Permission
 to edit `docs/designs/*.md` includes nested directories because OpenCode's `*`
@@ -164,7 +165,9 @@ Use only the named Goldfish agents allowed by your permissions. Every reviewer
 assignment and round starts a fresh child session; never resume a reviewer or
 send the parent conversation, private reasoning, or a persuasive design rationale.
 Pass only the review objective, target path/revision, scope, applicable standard,
-and approved reading list. A comprehension-only assignment reads the target alone.
+task maturity, round, and approved reading list/discovery roots. OriginalTarget
+may supply path provenance, never extra source content. A comprehension-only
+assignment reads the target alone.
 Prior reports belong in a reading list only when the selected stage explicitly
 requires them and the user has approved that input.
 

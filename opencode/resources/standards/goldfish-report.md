@@ -6,8 +6,9 @@
 This is the shared authoring contract for the seven personal Goldfish agents.
 Each agent embeds the necessary rules so it can run without reading this file.
 In particular, comprehension must not read a separate protocol or standard file.
-The later orchestration skill must validate results before synthesis; this
-document alone does not implement a validator or verify native tool records.
+The orchestration skill applies the [validation checklist](result-validation.md)
+before synthesis. This document does not verify native tool records; the runtime
+checklist is prompt-driven, not automatic machine enforcement.
 
 ## Assignment
 
@@ -21,6 +22,8 @@ document alone does not implement a validator or verify native tool records.
 | ReadingList | Explicit list of required local file paths; an empty list is valid |
 | Standard | Explicit local file path or `none` to use the embedded review lens |
 | DiscoveryRoots | Optional approved local directories for bounded source discovery; defaults to empty |
+| OriginalTarget | Optional original document path for relative-link provenance; not an additional readable input |
+| Objective | Optional concise review objective; never the parent's persuasive design rationale |
 
 Comprehension requires an empty ReadingList, Standard `none`, and absent or empty
 DiscoveryRoots. It reads the entire target and no other files. Other reviewers
@@ -56,12 +59,17 @@ reads and the audit must be finished, and missing_inputs must be empty. For
 `incomplete`, missing_inputs must explain the failure. Empty findings in an
 incomplete result never means no issues were found. A reviewer claiming completed
 reads is not independent proof that those tool calls occurred.
+Completed declarations must include coverage `entire file` for every required
+input. Multiple successful slice reads can truthfully be aggregated only after
+all content has been read. Partial coverage remains partial. Paths use normalized
+POSIX spelling without parent traversal; use consistent exact paths across the
+assignment, result, and evidence. This does not prove canonical filesystem identity.
 
 Each finding contains exactly these fields:
 
 | Key | Meaning |
 | --- | --- |
-| id | `<reviewer>-<round>-<n>`; n starts at 1 within this result |
+| id | `<reviewer>-<round>-<n>`; n follows output order from 1 without gaps |
 | severity | `Blocker`, `Major`, or `Nit` |
 | scope | Target section or actual target line range |
 | evidence | Concrete target wording and relevant inspected source paths; no invented citations |

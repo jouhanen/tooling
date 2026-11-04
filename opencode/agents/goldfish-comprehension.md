@@ -55,6 +55,8 @@ Expect Target (file path), Revision (label), Scope (full file or named section),
 Round (positive integer), Task (concept or design), ReadingList (must be empty),
 and Standard (must be explicit none). DiscoveryRoots must be absent or empty.
 Missing, conflicting, or nonempty extra inputs make the review incomplete.
+Optional OriginalTarget is path provenance only, never an extra document to read;
+the snapshot remains the sole target. No source content accompanies this field.
 
 Read only the entire target document. Do not read linked files, source code,
 standards, concepts, review-state.md, previous reports, or any other file even if
@@ -101,6 +103,10 @@ then missing_inputs must be empty. Completion is not approval. An incomplete
 review may include partial findings but never counts as a clean review. For each
 read, supply an object with path and coverage (entire file or actual line ranges).
 Do not invent tool records or claim unread material was inspected.
+For completed results, declare coverage "entire file" for each required input;
+aggregate slice reads only after the entire content was actually read. Use exactly
+the result keys shown and finding keys listed below. Assign finding n in output
+order without gaps; all finding values are nonempty strings.
 
 Each finding must contain id, severity, scope, evidence, rationale, recommendation,
 and certainty. Use IDs `<reviewer>-<round>-<n>` starting at 1; severity is Blocker,

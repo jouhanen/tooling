@@ -9,10 +9,10 @@ currently an installable OpenCode configuration.
 | --- | --- | --- |
 | `agents/elephant.md` | Persistent design discussion, drafting, and review coordination | Authored; offline checks only |
 | `agents/goldfish-*.md` | Fresh, specialized, read-only reviews | Authored; offline checks only |
-| `skills/` | Brainstorm, draft, review, and resolve procedures | Planned |
-| `commands/` | Explicit entry points selecting Elephant | Planned |
+| `skills/` | Brainstorm, draft, review, and resolve procedures | Authored; offline checks only |
+| `commands/` | Explicit entry points selecting Elephant in the current session | Authored; native discovery unverified |
 | `resources/templates/` | Concept, design, and durable review-state templates | Authored |
-| `resources/standards/` | Shared assignment/report contract; substantive review lenses embedded in agents | Report contract authored; task-specific standards later |
+| `resources/standards/` | Workflow, assignment/report, and validation contracts; substantive review lenses embedded in agents | Authored |
 
 The former V1 configuration and global Git/GitHub safety instructions have been
 removed from this repository. This does not remove copies previously installed
@@ -45,9 +45,8 @@ Live model checks will require separate authorization.
 
 `agents/elephant.md` uses native V2 frontmatter without a model override. It does
 not override Build, Plan, or the default agent. The prompt is self-contained for
-exploration and drafting. Named Goldfish prompts are now authored; review skills
-and orchestration will arrive in the next phase. It must stop rather than simulate
-a missing reviewer or skill.
+exploration and drafting. The four workflow skills and named Goldfish prompts are
+authored. It must stop rather than simulate a missing reviewer or skill.
 
 The user confirms a topic and destination before the first write. The default is:
 
@@ -58,12 +57,17 @@ docs/designs/<topic>/
   review-state.md
   reviews/
     round-01.md
+    round-01-target.md
+    round-01-goldfish-design-attempt-1.md
+    round-01-resolution-01.md
+    round-01-resolution-01-outcome.md
 ```
 
-Templates under `resources/templates/` are authoring aids. The future skills and
-installer will expose their installed resource locations. Elephant's standalone
-prompt includes the required field lists without relying on a sibling checkout
-or assuming that relative agent-body links are automatically resolved.
+Templates under `resources/templates/` are authoring aids. Skills resolve shared
+resources via `../../resources/` from their reported skill base directory. The
+future installer must preserve that layout. Elephant's standalone prompt includes
+the required field lists without relying on a sibling checkout or assuming that
+relative agent-body links are automatically resolved.
 
 The agent denies all actions except local reads, globs, questions, designated
 skills/reviewers, and Markdown writes under `docs/designs/`. External-directory
@@ -123,8 +127,14 @@ evidence, severity, recommendations, and conditional-risk versus confirmed-issue
 labels. Completion is not design approval. An incomplete result's empty findings
 must never be interpreted as no issues found.
 
-The contract is ready for the next phase's orchestration and validation rules;
-it does not yet implement a runtime result validator or verify native tool records.
+The review skill applies a shared validation checklist before synthesis. Runtime
+validation is prompt-driven, not a plugin-enforced machine check. The read-only
+Python reference validator under `scripts/` is available to operators and offline
+tests; Elephant cannot run it under its default policy. Neither validates actual
+native execution or proves context isolation on its own.
+
+See [the workflow guide](WORKFLOW.md) for commands, focused/full presets,
+stale-review handling, explicit resolution gates, and the operator validator.
 
 See [third-party notices](../THIRD_PARTY_NOTICES.md) before adding or adapting EGM
 material. No runtime component may depend on a sibling EGM checkout.

@@ -8,6 +8,9 @@
 - Design: <path and revision, or not started>
 - Phase: <explore/draft/review/resolve/handoff>
 - Current round: <not started, or number>
+- Review plan: <preset/stage order, task, scope, reviewer set and per-reviewer inputs>
+- Review cycle round count and cap: <0 of 5; bounded extension only with approval>
+- Clean streak: <0; reset on changed content/inputs/plan or incomplete/stale audit>
 - Pending action: <one action needing confirmation>
 
 ## Decisions and constraints
@@ -43,6 +46,14 @@ On resume, confirm the next action; this file cannot grant permission by itself.
 
 <Use not-run/running/completed/incomplete/stale. Completion is not approval.
 Keep old reports and target snapshots; do not overwrite a previous round.>
+
+## Resolution proposals and outcomes
+
+| Round and resolution | Current target revision | Proposal path | Actual approved scope | Outcome path and remaining verification |
+| --- | --- | --- | --- | --- |
+
+<Keep sealed reports/snapshots and prior resolution proposals unchanged. A fix
+is fixed-unverified until fresh evidence checks it. "Continue" is not risk acceptance.>
 
 ## Findings ledger
 

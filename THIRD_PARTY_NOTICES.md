@@ -27,12 +27,17 @@ project describes itself as not an officially supported Google product.
 | `opencode/agents/goldfish-style.md` | `agents/style.md` | Adapted precision, claim calibration, and editorial actions; preserve useful operational cautions |
 | `opencode/agents/goldfish-codebase.md` | `agents/codebase_details.md` | Adapted current-state verification and proposed-file distinction; bounded source evidence rather than exhaustive documentation |
 | `opencode/agents/goldfish-readiness.md` | `agents/implementation_readiness.md` | Adapted actionability, compatibility, and rollout checks; preserve ordinary implementation discretion |
+| `opencode/skills/egm-brainstorm/SKILL.md` | `skills/egm-brainstorm/SKILL.md` | Adapted iterative exploration and concept agreement; personal artifact names and optional review presets, no publication |
+| `opencode/skills/egm-draft/SKILL.md` | `skills/egm-draft/SKILL.md` | Adapted section checkpoints and predecessor reconciliation; bounded writes and separate implementation approval |
+| `opencode/skills/egm-review/SKILL.md` | `skills/egm-review/SKILL.md`; `skills/egm-review-loop/SKILL.md` | Adapted staged fresh reviews, one retry, findings provenance, and capped convergence; personal presets, immutable snapshots, validated declarations, no automatic risk acceptance |
+| `opencode/skills/egm-resolve/SKILL.md` | `skills/egm-resolve/SKILL.md` | Adapted evidence-based contest/escalation/fix proposals; separate immutable proposals/outcomes and exact revision-scoped approvals |
 
 All adaptations above use the reference commit recorded at the top of this file
-and carry source and change notices. `review-state.md`, the shared
-`resources/standards/goldfish-report.md` protocol under `opencode/`, the offline
-tests, and repository documentation are original local additions, not copied
-upstream files. No upstream `NOTICE` file was found in the reference checkout.
+and carry source and change notices. Shared workflow/validation protocols,
+review-state/round/resolution templates, commands, the Python reference validator,
+offline tests, and repository documentation are original local additions, not
+copied upstream files. No upstream `NOTICE` file was found in the reference
+checkout.
 
 ### Rules for subsequent adaptations
 

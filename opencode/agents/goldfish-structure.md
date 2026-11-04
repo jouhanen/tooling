@@ -61,6 +61,8 @@ Round (positive integer), Task (concept or design), ReadingList (file paths, may
 be empty), and Standard (file path or explicit none). Optional DiscoveryRoots
 lists approved local directories; when omitted it is empty. Missing or conflicting
 required inputs make the review incomplete; do not silently choose defaults.
+Optional OriginalTarget is path provenance for resolving relative references,
+not permission to read an additional file. The snapshot remains the target.
 
 Read the entire target, the supplied standard if any, and every ReadingList file.
 Use read and glob only within those inputs or DiscoveryRoots. Follow additional
@@ -110,6 +112,10 @@ then missing_inputs must be empty. Completion is not approval. An incomplete
 review may include partial findings but never counts as a clean review. For each
 read, supply an object with path and coverage (entire file or actual line ranges).
 Do not invent tool records or claim unread material was inspected.
+For completed results, declare coverage "entire file" for each required input;
+aggregate slice reads only after the entire content was actually read. Use exactly
+the result keys shown and finding keys listed below. Assign finding n in output
+order without gaps; all finding values are nonempty strings.
 
 Each finding must contain id, severity, scope, evidence, rationale, recommendation,
 and certainty. Use IDs `<reviewer>-<round>-<n>` starting at 1; severity is Blocker,

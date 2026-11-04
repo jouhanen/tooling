@@ -1,9 +1,9 @@
 # Using the personal Elephant/Goldfish workflow
 
-The prompts, skills, commands, and installer are available, but native discovery
-and workflow behavior are not yet verified. Use the [installer](INSTALL.md) with
-a disposable project first; do not copy this package over an existing profile.
-These examples describe the intended installed interface, not live test evidence.
+The prompts, skills, commands, and installer are available. Native discovery and
+mechanical command/dispatch paths passed scripted 2.2.5 probes, but live workflow
+behavior remains unverified. Use the [installer](INSTALL.md) with a disposable
+project first. These examples describe intended use, not live acceptance evidence.
 
 ## Entry points
 
@@ -151,5 +151,6 @@ repairs output into a passing result.
 
 It does not prove that the declared reads happened, the entire file was actually
 read, native dispatch completed, citations are true, approvals exist, or the child
-context is isolated. Host discovery, permissions, and workflow behavior still
-need native probes and separately authorized live verification.
+context is isolated. [Native probes](VERIFY.md) establish only their specific
+discovery/dispatch/tool cases; real workflow behavior still needs separately
+authorized live verification.

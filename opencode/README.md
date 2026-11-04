@@ -2,16 +2,17 @@
 
 This directory contains the personal Elephant/Goldfish workflow package. Use the
 opt-in installer rather than copying it over an existing OpenCode profile. Native
-discovery and runtime behavior remain unverified.
+discovery and sampled tool boundaries passed scripted 2.2.5 probes; live model
+workflow behavior remains unverified.
 
 ## Package boundaries
 
 | Component | Responsibility | Status |
 | --- | --- | --- |
-| `agents/elephant.md` | Persistent design discussion, drafting, and review coordination | Authored; offline checks only |
-| `agents/goldfish-*.md` | Fresh, specialized, read-only reviews | Authored; offline checks only |
-| `skills/` | Brainstorm, draft, review, and resolve procedures | Authored; offline checks only |
-| `commands/` | Explicit entry points selecting Elephant in the current session | Authored; native discovery unverified |
+| `agents/elephant.md` | Persistent design discussion, drafting, and review coordination | Native discovery and sampled write/dispatch boundaries probed |
+| `agents/goldfish-*.md` | Fresh, specialized, read-only reviews | Native discovery/dispatch and sampled read/skill boundaries probed |
+| `skills/` | Brainstorm, draft, review, and resolve procedures | Native loading and resource reads probed; live behavior unverified |
+| `commands/` | Explicit entry points selecting Elephant in the current session | Native selection and skill-loading paths probed |
 | `resources/templates/` | Concept, design, and durable review-state templates | Authored |
 | `resources/standards/` | Workflow, assignment/report, and validation contracts; substantive review lenses embedded in agents | Authored |
 
@@ -39,9 +40,10 @@ discovery without rewriting opencode.json(c). It detects target-local collisions
 tracks file hashes, refuses modified-file updates, and preserves local edits on
 uninstall. It does not reconstruct the full effective host registry.
 
-[Offline checks](../tests/README.md) cover installation and workflow contracts,
-but native host enforcement and live model behavior have not been verified.
-Live model checks require separate authorization.
+[Offline checks](../tests/README.md) cover installation and workflow contracts.
+[Native probes](VERIFY.md) cover discovery and specific dispatch/tool boundaries
+on 2.2.5 with a scripted provider, not general enforcement or real model behavior.
+Live acceptance requires separate authorization.
 
 ## Elephant and artifacts
 
@@ -105,7 +107,8 @@ file cannot grant new permission or replace a missing conversational approval.
 All are native V2 `mode: subagent` definitions without a model override. Their
 IDs match Elephant's exact dispatch allowlist. Each prompt embeds its review lens,
 read boundary, and JSON result contract; no sibling checkout or implicit agent
-file includes are required. Host discovery and runtime enforcement remain untested.
+file includes are required. Discovery and selected tool boundaries were probed
+on 2.2.5; they do not establish general isolation or live review compliance.
 
 All deny actions by default and allow local reads, excluding sensitive `.env`
 files except `.env.example`. Six also allow glob; comprehension does not. Writes,

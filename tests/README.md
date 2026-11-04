@@ -29,6 +29,8 @@ obsolete files, modified-file retention, symlink/traversal rejection, preview
 rechecks, best-effort rollback for injected I/O failures, and CLI exit codes.
 Native discovery, effective merged configuration, and runtime enforcement still
 need separate probes; source-policy simulations cannot establish those outcomes.
+The [opt-in native runner](../opencode/VERIFY.md) has recorded scoped 2.2.5 results
+outside ordinary CI; it is not invoked by unittest discovery.
 
 `test_review_contract.py` exercises the read-only operator validator in
 `scripts/review_contract.py` with positive/negative declaration fixtures. It checks
@@ -37,6 +39,12 @@ comprehension, finding fields/IDs/severity, malformed/incomplete results, and CL
 exit codes without changing input files. The validator is not available as an
 Elephant tool and cannot prove native completion or actual reads.
 
-No test makes model calls, changes the live OpenCode configuration, or establishes
-runtime enforcement or reviewer isolation. Native-host probes and live acceptance
-tests belong to a later phase and must report their evidence separately.
+`test_native_probe.py` uses synthetic contexts and in-memory scripted responses
+to check failed/missing native evidence, identity linkage, session reuse,
+environment stripping, provider policy, and resource wiring. It never invokes
+OpenCode or a model; it may bind a temporary loopback fixture socket.
+
+The ordinary suite makes no model calls and changes no live OpenCode configuration.
+It does not establish runtime enforcement or reviewer isolation. The optional
+native runner does invoke a private OpenCode server and its own scripted loopback
+provider. Live provider/model acceptance remains separately authorized and unrun.

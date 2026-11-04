@@ -12,8 +12,11 @@ product. It does not aim to track upstream EGM behavior exactly.
 Elephant, seven Goldfish agents, four workflow skills/commands, artifact templates,
 and review/validation contracts are authored, with offline checks and a read-only
 operator validator. The project/global installer supports dry-run, owned-file
-updates, and conservative uninstall. Native host behavior, enforcement, and model
-compliance remain unverified; start with a disposable project.
+updates, and conservative uninstall. Native discovery and sampled dispatch/tool
+boundaries passed scripted probes on OpenCode 2.2.5 in isolated project/global
+profiles. Live model compliance and human approval behavior remain unverified;
+start with a disposable project. See [verification](opencode/VERIFY.md) for scope
+and evidence, not a general isolation claim.
 
 The initial target is OpenCode **V2.2.5 on Linux, including WSL2**. This is a
 development baseline, not a claim of verified workflow support.
@@ -52,6 +55,8 @@ scope.
   approval gates, and artifact lifecycle.
 - [`opencode/INSTALL.md`](opencode/INSTALL.md): opt-in installation, updates,
   collision checks, and removal.
+- [`opencode/VERIFY.md`](opencode/VERIFY.md): native probes, recorded limits, and
+  the separately authorized live acceptance checklist.
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md): EGM attribution and source
   provenance.
 - [`tests/`](tests/README.md): offline checks and their verification limits.

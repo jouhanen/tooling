@@ -1,8 +1,9 @@
 # Install, update, and remove the personal workflow
 
-The installer has offline tests but native OpenCode discovery, permissions, and
-live workflow behavior are not verified yet. Start with a disposable project.
-Installing files is not proof that a Goldfish review is isolated or completes.
+The installer has offline tests, and native discovery plus sampled tool boundaries
+passed scripted 2.2.5 probes in disposable project/global profiles. Live workflow
+behavior is not verified. Start with a disposable project. Installing files is
+not proof that a Goldfish review is isolated or completes; see [verification](VERIFY.md).
 
 Requirements: Python 3.10+ and a Linux/POSIX filesystem, including WSL2. The
 installer uses only the Python standard library; PyYAML is for tests, not install

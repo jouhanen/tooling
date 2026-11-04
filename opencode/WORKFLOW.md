@@ -1,9 +1,9 @@
 # Using the personal Elephant/Goldfish workflow
 
-The prompts, skills, and commands are authored but not yet installed or verified
-against the host. These examples describe the intended interface after the
-installer and native-host verification phases. Do not copy this package over an
-existing OpenCode configuration to try them prematurely.
+The prompts, skills, commands, and installer are available, but native discovery
+and workflow behavior are not yet verified. Use the [installer](INSTALL.md) with
+a disposable project first; do not copy this package over an existing profile.
+These examples describe the intended installed interface, not live test evidence.
 
 ## Entry points
 

@@ -22,6 +22,14 @@ four skill/command pairs, relative resource paths, preset coverage, approval and
 failure rules, snapshots, and provenance. These text checks are not model-behavior
 tests or evidence of native host discovery.
 
+Installer checks use disposable directories, never the live host profile. They
+cover project/global layouts, generated permission exceptions, collision refusal,
+JSONC/config preservation, ownership hashes, idempotency, updates, missing and
+obsolete files, modified-file retention, symlink/traversal rejection, preview
+rechecks, best-effort rollback for injected I/O failures, and CLI exit codes.
+Native discovery, effective merged configuration, and runtime enforcement still
+need separate probes; source-policy simulations cannot establish those outcomes.
+
 `test_review_contract.py` exercises the read-only operator validator in
 `scripts/review_contract.py` with positive/negative declaration fixtures. It checks
 strict JSON, assignment identity, required read declarations, target-only

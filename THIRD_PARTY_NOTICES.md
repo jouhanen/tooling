@@ -34,10 +34,10 @@ project describes itself as not an officially supported Google product.
 
 All adaptations above use the reference commit recorded at the top of this file
 and carry source and change notices. Shared workflow/validation protocols,
-review-state/round/resolution templates, commands, the Python reference validator,
-offline tests, and repository documentation are original local additions, not
-copied upstream files. No upstream `NOTICE` file was found in the reference
-checkout.
+review-state/round/resolution templates, commands, the Python installer and
+reference validator, offline tests, and repository documentation are original
+local additions, not copied upstream files. No upstream `NOTICE` file was found
+in the reference checkout.
 
 ### Rules for subsequent adaptations
 

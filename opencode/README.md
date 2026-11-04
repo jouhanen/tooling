@@ -1,7 +1,8 @@
 # OpenCode V2 workflow package
 
-This directory will contain the personal Elephant/Goldfish workflow. It is not
-currently an installable OpenCode configuration.
+This directory contains the personal Elephant/Goldfish workflow package. Use the
+opt-in installer rather than copying it over an existing OpenCode profile. Native
+discovery and runtime behavior remain unverified.
 
 ## Package boundaries
 
@@ -32,14 +33,15 @@ elsewhere or change the running OpenCode configuration.
 
 ## Installation and validation
 
-An installer will be added after the agents and workflows. Until then, do not copy
-this directory over `~/.config/opencode` or an existing project's `.opencode`
-directory. [Offline contract checks](../tests/README.md) are available, but native
-host enforcement and live model behavior have not been verified.
+See [installation](INSTALL.md) for the standard-library installer. It previews by
+default and requires `--apply` to write. Project and global installations use file
+discovery without rewriting opencode.json(c). It detects target-local collisions,
+tracks file hashes, refuses modified-file updates, and preserves local edits on
+uninstall. It does not reconstruct the full effective host registry.
 
-The intended installer will support project and global destinations, preview
-changes, detect collisions, track owned files, and preserve unrelated settings.
-Live model checks will require separate authorization.
+[Offline checks](../tests/README.md) cover installation and workflow contracts,
+but native host enforcement and live model behavior have not been verified.
+Live model checks require separate authorization.
 
 ## Elephant and artifacts
 
@@ -65,7 +67,7 @@ docs/designs/<topic>/
 
 Templates under `resources/templates/` are authoring aids. Skills resolve shared
 resources via `../../resources/` from their reported skill base directory. The
-future installer must preserve that layout. Elephant's standalone prompt includes
+installer preserves that layout. Elephant's standalone prompt includes
 the required field lists without relying on a sibling checkout or assuming that
 relative agent-body links are automatically resolved.
 
@@ -107,11 +109,12 @@ file includes are required. Host discovery and runtime enforcement remain untest
 
 All deny actions by default and allow local reads, excluding sensitive `.env`
 files except `.env.example`. Six also allow glob; comprehension does not. Writes,
-shell, questions, skills, delegation, network, MCP, Code Mode, and external-directory
-access are denied. A global installation can load these agent definitions, but
-review inputs outside the active location/worktree remain inaccessible. The
-installer phase must handle narrowly scoped access to installed resources; do not
-weaken the boundary generally to make a run complete.
+shell, questions, skills, delegation, network, MCP, and Code Mode are denied.
+External access is denied in source Goldfish policies. Global installs render
+one external-directory exception for bundled resources in the six source-aware
+reviewers, not comprehension; Elephant also gets that narrow resource exception.
+Other review inputs outside the active location/worktree remain inaccessible to
+Goldfish. Do not weaken that boundary generally to make a run complete.
 
 Comprehension reads the target alone. Other agents use an explicit reading list
 and optional approved discovery roots. Assignment-level file restrictions are

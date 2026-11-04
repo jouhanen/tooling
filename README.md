@@ -11,9 +11,9 @@ product. It does not aim to track upstream EGM behavior exactly.
 
 Elephant, seven Goldfish agents, four workflow skills/commands, artifact templates,
 and review/validation contracts are authored, with offline checks and a read-only
-operator validator. Installation and runtime verification are not implemented yet.
-There is no supported installation at this stage; host behavior and model
-compliance remain unverified.
+operator validator. The project/global installer supports dry-run, owned-file
+updates, and conservative uninstall. Native host behavior, enforcement, and model
+compliance remain unverified; start with a disposable project.
 
 The initial target is OpenCode **V2.2.5 on Linux, including WSL2**. This is a
 development baseline, not a claim of verified workflow support.
@@ -50,6 +50,8 @@ scope.
 - [`opencode/`](opencode/README.md): workflow package and development status.
 - [`opencode/WORKFLOW.md`](opencode/WORKFLOW.md): commands, review presets,
   approval gates, and artifact lifecycle.
+- [`opencode/INSTALL.md`](opencode/INSTALL.md): opt-in installation, updates,
+  collision checks, and removal.
 - [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md): EGM attribution and source
   provenance.
 - [`tests/`](tests/README.md): offline checks and their verification limits.

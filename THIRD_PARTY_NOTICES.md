@@ -17,11 +17,14 @@ project describes itself as not an officially supported Google product.
 | Local file | Upstream file | Treatment |
 | --- | --- | --- |
 | `LICENSE` | `LICENSE` | Copied unchanged from the reference commit |
+| `opencode/agents/elephant.md` | `skills/egm-brainstorm/SKILL.md`; `skills/egm-draft/SKILL.md` | Adapted questioning, artifact-first drafting, independent review, and approval rules into a V2 primary agent; added local permissions and resume contracts |
+| `opencode/resources/templates/concepts.md` | `skills/egm-brainstorm/SKILL.md` | Adapted concept structure; added evidence, revision, and explicit approval fields |
+| `opencode/resources/templates/design.md` | `skills/egm-draft/SKILL.md` | Adapted drafting sections; added revision, operational risks, and implementation approval fields |
 
-No upstream agent prompts, skills, standards, or templates have been imported
-yet. Repository documentation describes the intended personal workflow and is not
-a copy of upstream documentation. No upstream `NOTICE` file was found in the
-reference checkout.
+All adaptations above use the reference commit recorded at the top of this file
+and carry source and change notices. `review-state.md`, the offline tests, and
+repository documentation are original local additions, not copied upstream
+files. No upstream `NOTICE` file was found in the reference checkout.
 
 ### Rules for subsequent adaptations
 

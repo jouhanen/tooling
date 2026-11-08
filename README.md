@@ -14,9 +14,11 @@ and review/validation contracts are authored, with offline checks and a read-onl
 operator validator. The project/global installer supports dry-run, owned-file
 updates, and conservative uninstall. Native discovery and sampled dispatch/tool
 boundaries passed scripted probes on OpenCode 2.2.5 in isolated project/global
-profiles. A live human workflow exercise demonstrated approval pauses but exposed
-result-validation and raw-evidence preservation failures; full acceptance and live
-verification of the repairs remain pending. Start with a disposable project.
+profiles. An earlier live exercise exposed validation and evidence-preservation
+failures. A subsequent live test of the repaired workflow exercised reviews,
+resolution, stale-coverage detection, and handoff; synthetic saved-result
+validation passed, but native malformed-response handling remains unverified.
+Full acceptance remains pending. Start with a disposable project.
 See [verification](opencode/VERIFY.md) for scope
 and evidence, not a general isolation claim.
 

@@ -3,10 +3,11 @@
 The prompts, skills, commands, and installer are available. Native discovery and
 mechanical command/dispatch paths passed scripted 2.2.5 probes. A
 [live audit](verification/2026-11-08-live-audit.md) demonstrated parts of the workflow
-but found validation and evidence-preservation failures; full acceptance and live
-verification of the repairs remain pending. Use the [installer](INSTALL.md) with
-a disposable project first. These examples describe intended use, not a passing
-live acceptance run.
+but found validation and evidence-preservation failures. A later
+[live follow-up](verification/2026-11-08-live-follow-up.md) exercised the repairs
+in part; native malformed-response handling and full acceptance remain unverified.
+Use the [installer](INSTALL.md) with a disposable project first. These examples
+describe intended use, not a passing live acceptance run.
 
 ## Entry points
 

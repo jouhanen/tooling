@@ -43,6 +43,10 @@ finding without repairing it, reject trailing slashes in assignment/read paths
 while accepting `/`, and preserve malformed input bytes on CLI failure. Workflow
 text checks require explicit raw-copy, native-ID, validation-record, and erratum
 instructions; they do not establish that a real model obeys those instructions.
+Read-evidence regression text checks separate mandatory read declarations from
+independent trace verification: unavailable traces alone must not cause retries
+or incomplete coverage, while missing declarations and contradictory evidence
+still block acceptance. These checks do not prove actual reads or live compliance.
 
 `test_native_probe.py` uses synthetic contexts and in-memory scripted responses
 to check failed/missing native evidence, identity linkage, session reuse,

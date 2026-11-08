@@ -125,13 +125,20 @@ Elephant has no shell/Code Mode permission to execute it. Runtime validation her
 is instruction-driven; disclose that limit rather than claiming machine enforcement.
 Before synthesis, persist a validation record for each attempt: assignment paths;
 native identity/completion and copied ID; JSON/top-level schema; assignment/result
-identity; required reads; finding fields/IDs/order/enums; and raw-copy comparison.
+identity; required read declarations; separate independent read verification;
+finding fields/IDs/order/enums; and raw-copy comparison.
 For each check write pass/fail/unverified and concrete evidence or the failed
 field. For every finding explicitly check all seven fields, including certainty;
 no findings means that finding check is not applicable, not inferred from summary.
 Do not record a blanket "checklist passed" without these individual outcomes.
-Any failure prevents accepted coverage; an unverified mandatory check remains
-incomplete. Reread the saved raw block against the native payload before marking
+Any mandatory check failure prevents accepted coverage; an unverified mandatory
+check remains incomplete. Independent read verification is not mandatory when
+native read traces are unavailable or insufficient: accept valid required
+whole-file declarations with that evidence limit disclosed, without claiming
+independently verified reads. Missing/partial required declarations or native
+evidence contradicting declared coverage still block acceptance. Unavailable
+traces alone do not make the assignment incomplete, reset the clean streak, or
+justify a retry. Reread the saved raw block against the native payload before marking
 raw-copy comparison passed. Put any parent interpretation outside that block;
 never supply a missing certainty, severity, ID, or read on the reviewer's behalf.
 

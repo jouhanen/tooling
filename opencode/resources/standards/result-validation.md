@@ -9,8 +9,10 @@ reference validator. Offline validator tests do not establish model compliance.
 
 Before synthesis, record each check's pass/fail/unverified outcome and supporting
 native message/tool reference or specific failed field in the attempt artifact.
-Do not replace these outcomes with a blanket checklist-passed statement. Required
-checks that fail or cannot be established prevent accepted coverage. Native
+Do not replace these outcomes with a blanket checklist-passed statement. Mandatory
+contract and native-completion checks that fail or cannot be established prevent
+accepted coverage. Independent read verification is a separate evidence check,
+not a mandatory acceptance check when native read traces are unavailable. Native
 completion and contract validity are separate: a completed tool can return an
 invalid declaration.
 
@@ -47,6 +49,15 @@ need a corrected plan and a new round, not a retry with changed inputs.
    or approved discovery roots are invalid; comprehension permits only the target.
    A declaration is not independent proof of a read: compare native tool records
    where available and disclose unverified whole-file coverage.
+   Record required read declarations separately from independent read verification.
+   Valid required whole-file declarations pass the declaration check; if native
+   read traces are unavailable or insufficient, mark independent verification
+   unverified and disclose the evidence limit. This alone does not invalidate the
+   result, make the assignment incomplete, reset the clean streak, or justify a retry.
+   Do not claim independently verified reads without supporting native records.
+   Missing/partial required declarations or native evidence contradicting declared
+   coverage block acceptance. An incomplete trace is not itself proof of an
+   incomplete read; a recorded failed read with no successful replacement is.
 6. Each finding has exactly id, severity, scope, evidence, rationale,
    recommendation, and certainty. All are nonempty strings. IDs follow
    `<reviewer>-<round>-<n>` with n assigned in output order from 1, without gaps.

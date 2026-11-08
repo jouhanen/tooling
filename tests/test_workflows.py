@@ -162,6 +162,32 @@ class WorkflowContractTests(unittest.TestCase):
                 result = validate_result(parse_json(example), task, reviewer)
                 self.assertEqual(result["status"], "incomplete")
 
+    def test_read_trace_visibility_is_not_a_mandatory_acceptance_check(self):
+        files = (
+            "resources/standards/result-validation.md",
+            "skills/egm-review/SKILL.md",
+            "resources/templates/review-round.md",
+        )
+        for file in files:
+            text = " ".join((PACKAGE / file).read_text(encoding="utf-8").split()).lower()
+            with self.subTest(file=file):
+                for phrase in (
+                    "independent read verification", "declarations",
+                    "unavailable", "insufficient", "evidence limit",
+                    "independently verified reads", "reset the clean streak",
+                    "justify a retry", "missing/partial required declarations",
+                    "native evidence contradicting declared coverage",
+                ):
+                    self.assertIn(phrase, text)
+                self.assertNotIn("any failure prevents accepted coverage", text)
+                self.assertNotIn("required reads and available native read evidence", text)
+        report = (PACKAGE / files[2]).read_text(encoding="utf-8")
+        self.assertIn("| Required whole-file read declarations |", report)
+        self.assertIn("| Independent read verification (", report)
+        checklist = " ".join((PACKAGE / files[0]).read_text(encoding="utf-8").split())
+        self.assertIn("An incomplete trace is not itself proof of an incomplete read", checklist)
+        self.assertIn("a recorded failed read with no successful replacement is", checklist)
+
     def test_live_audit_repairs_are_explicit_prompt_contracts(self):
         _, review = markdown(PACKAGE / "skills/egm-review/SKILL.md")
         checklist = (PACKAGE / "resources/standards/result-validation.md").read_text(encoding="utf-8")

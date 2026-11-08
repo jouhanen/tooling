@@ -31,7 +31,13 @@ and cross-check both logs. Do not fill missing fields or reserialize raw output.
 
 <Persist this record in each attempt artifact before synthesis; link it in the
 stage log. Use pass/fail/unverified, or not-applicable for an empty findings array.
-A failed or unverified required check prevents accepted coverage.>
+A failed or unverified mandatory contract/native-completion check prevents
+accepted coverage. Independent read verification is separate: unavailable or
+insufficient traces alone do not invalidate valid required whole-file declarations,
+make the assignment incomplete, reset the clean streak, or justify a retry.
+Disclose that evidence limit without claiming independently verified reads.
+Missing/partial required declarations or native evidence contradicting declared
+coverage still block acceptance.>
 
 | Check | Outcome | Native reference or specific discrepancy |
 | --- | --- | --- |
@@ -39,7 +45,8 @@ A failed or unverified required check prevents accepted coverage.>
 | Native reviewer identity/completion and copied session ID | pending | |
 | JSON syntax and top-level schema | pending | |
 | Assignment/result identity | pending | |
-| Required reads and available native read evidence | pending | |
+| Required whole-file read declarations | pending | |
+| Independent read verification (unverified if traces unavailable/insufficient) | pending | |
 | Every finding's seven fields, IDs, severity order, and enums | pending | |
 | Saved raw payload compared verbatim to native output | pending | |
 

@@ -1,9 +1,12 @@
 # Using the personal Elephant/Goldfish workflow
 
 The prompts, skills, commands, and installer are available. Native discovery and
-mechanical command/dispatch paths passed scripted 2.2.5 probes, but live workflow
-behavior remains unverified. Use the [installer](INSTALL.md) with a disposable
-project first. These examples describe intended use, not live acceptance evidence.
+mechanical command/dispatch paths passed scripted 2.2.5 probes. A
+[live audit](verification/2026-11-08-live-audit.md) demonstrated parts of the workflow
+but found validation and evidence-preservation failures; full acceptance and live
+verification of the repairs remain pending. Use the [installer](INSTALL.md) with
+a disposable project first. These examples describe intended use, not a passing
+live acceptance run.
 
 ## Entry points
 
@@ -93,6 +96,14 @@ are preserved in separate `round-NN-<reviewer>-attempt-A.md` files. Round report
 append stage outcomes while running and are sealed at completion/interruption.
 Later repairs do not rewrite snapshots, raw results, or sealed reports.
 
+Copy reviewer payloads verbatim, with native wrappers separate, and cross-check
+session IDs against native completions. Persist per-attempt validation outcomes
+before synthesis; missing finding fields (including certainty) require rejection,
+not parent-supplied repairs. Normalize proposed directory spelling before approval
+(no trailing slash except `/`); never rewrite sent inputs to pass validation.
+Later evidence errors use a separate dated erratum linked from current state;
+affected coverage becomes incomplete without erasing historical findings.
+
 Results must match the JSON contract and declared required reads. One fresh retry
 is allowed; unavailable files/permissions must be corrected before retrying.
 Changed inputs require a new plan/round. Failed, malformed, or incomplete reviews
@@ -152,5 +163,5 @@ repairs output into a passing result.
 It does not prove that the declared reads happened, the entire file was actually
 read, native dispatch completed, citations are true, approvals exist, or the child
 context is isolated. [Native probes](VERIFY.md) establish only their specific
-discovery/dispatch/tool cases; real workflow behavior still needs separately
-authorized live verification.
+discovery/dispatch/tool cases; full acceptance of the repaired workflow still
+needs separately authorized live verification.

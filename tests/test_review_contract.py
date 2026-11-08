@@ -164,6 +164,52 @@ class ReviewDeclarationTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_result(value, assignment(), "goldfish-design")
 
+    def test_live_regression_missing_certainty_is_rejected_without_repair(self):
+        # Round 02 readiness completed natively, but omitted certainty on both
+        # findings. Completion and plausible prose must not make this valid.
+        task = assignment() | {"Round": 2}
+        reviewer = "goldfish-readiness"
+        value = result(reviewer) | {"round": 2}
+        value["findings"] = [
+            finding(reviewer, number=n) | {"id": f"{reviewer}-2-{n}"}
+            for n in (1, 2)
+        ]
+        for item in value["findings"]:
+            del item["certainty"]
+        before = copy.deepcopy(value)
+        with self.assertRaisesRegex(ContractError, "Finding 1 missing required fields: certainty"):
+            validate_result(value, task, reviewer)
+        self.assertEqual(value, before)
+        # Even a valid first finding cannot mask a malformed second finding.
+        value["findings"][0]["certainty"] = "risk"
+        before = copy.deepcopy(value)
+        with self.assertRaisesRegex(ContractError, "Finding 2 missing required fields: certainty"):
+            validate_result(value, task, reviewer)
+        self.assertEqual(value, before)
+
+    def test_unknown_finding_field_is_identified_without_repair(self):
+        value = result() | {"findings": [finding() | {"approved": True}]}
+        before = copy.deepcopy(value)
+        with self.assertRaisesRegex(ContractError, "Finding 1 unknown fields: approved"):
+            validate_result(value, assignment(), "goldfish-design")
+        self.assertEqual(value, before)
+
+    def test_directory_spelling_is_strict_in_all_assignment_paths(self):
+        for field in ("Target", "ReadingList", "Standard", "DiscoveryRoots", "OriginalTarget"):
+            for path in ("/work/project/", "/work//project", "/work/./project", "/work/../project"):
+                task = assignment() | {field: [path] if field in ("ReadingList", "DiscoveryRoots") else path}
+                before = copy.deepcopy(task)
+                with self.subTest(field=field, path=path), self.assertRaises(ContractError):
+                    validate_assignment(task, "goldfish-codebase")
+                self.assertEqual(task, before, "Do not normalize sent assignments")
+        for root in ("/", "/work/project", "src"):
+            with self.subTest(valid_root=root):
+                validate_assignment(assignment() | {"DiscoveryRoots": [root]}, "goldfish-codebase")
+        value = result()
+        value["reads"][0]["path"] += "/"
+        with self.assertRaisesRegex(ContractError, "trailing slash"):
+            validate_result(value, assignment(), "goldfish-design")
+
     def test_comprehension_requires_paraphrase_and_only_target(self):
         task = assignment()
         task.update(ReadingList=[], Standard="none", DiscoveryRoots=[])
@@ -227,6 +273,23 @@ class ReviewDeclarationTests(unittest.TestCase):
             result_path.write_text("not JSON", encoding="utf-8")
             with contextlib.redirect_stdout(io.StringIO()):
                 self.assertEqual(main(args), 1)
+
+    def test_cli_preserves_malformed_live_style_payload_verbatim(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task_path, result_path = root / "assignment.json", root / "result.json"
+            value = result() | {"findings": [finding()]}
+            del value["findings"][0]["certainty"]
+            task_path.write_text(json.dumps(assignment(), indent=2), encoding="utf-8")
+            result_path.write_text(json.dumps(value, indent=4) + "\n", encoding="utf-8")
+            before = {p.name: p.read_bytes() for p in root.iterdir()}
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output):
+                code = main(["--assignment", str(task_path), "--result", str(result_path),
+                             "--reviewer", "goldfish-design"])
+            self.assertEqual(code, 1)
+            self.assertIn("missing required fields: certainty", output.getvalue())
+            self.assertEqual(before, {p.name: p.read_bytes() for p in root.iterdir()})
 
 
 if __name__ == "__main__":

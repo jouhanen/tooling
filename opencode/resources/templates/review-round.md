@@ -23,6 +23,26 @@
 results/errors in round-NN-<reviewer>-attempt-A.md. Do not invent native IDs.
 Statuses: completed/incomplete/not-run. Partial output is not a completed audit.>
 
+<Each attempt preserves the exact sent assignment and verbatim reviewer payload,
+with native wrappers separate. Copy session IDs directly from tool completions
+and cross-check both logs. Do not fill missing fields or reserialize raw output.>
+
+### Per-attempt validation record
+
+<Persist this record in each attempt artifact before synthesis; link it in the
+stage log. Use pass/fail/unverified, or not-applicable for an empty findings array.
+A failed or unverified required check prevents accepted coverage.>
+
+| Check | Outcome | Native reference or specific discrepancy |
+| --- | --- | --- |
+| Assignment paths, including directory spelling | pending | |
+| Native reviewer identity/completion and copied session ID | pending | |
+| JSON syntax and top-level schema | pending | |
+| Assignment/result identity | pending | |
+| Required reads and available native read evidence | pending | |
+| Every finding's seven fields, IDs, severity order, and enums | pending | |
+| Saved raw payload compared verbatim to native output | pending | |
+
 ## Comprehension paraphrase
 
 <Retain the complete paraphrase when selected and completed, including no-finding
@@ -54,3 +74,5 @@ risks/contests with user scope, Nits, and fixed-unverified ledger items.>
 
 <Append while running; seal when the round ends. Do not revise a sealed report
 to reflect later repairs. Use separate resolution proposals and outcomes.>
+<Later evidence errors need a separate dated erratum linked from current state;
+keep sealed reports, snapshots, and original attempts unchanged.>

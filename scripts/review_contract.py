@@ -48,6 +48,7 @@ def normalized_path(value):
     """Lexical POSIX check only: no realpath, symlink, or access verification."""
     require(nonempty_string(value), "Paths must be nonempty strings")
     require(not any(c in value for c in ("\x00", "\n", "\r", "\\")), "Unsupported path characters")
+    require(value == "/" or not value.endswith("/"), "Paths must not have a trailing slash except /")
     path = PurePosixPath(value)
     require(".." not in path.parts and path.as_posix() == value, "Paths must be normalized POSIX paths")
     return path
@@ -146,7 +147,11 @@ def validate_result(result, assignment, reviewer):
     require(isinstance(result["findings"], list), "findings must be an array")
     previous_severity = -1
     for number, finding in enumerate(result["findings"], 1):
-        require(isinstance(finding, dict) and set(finding) == FINDING_KEYS, "Invalid finding fields")
+        require(isinstance(finding, dict), f"Finding {number} must be an object")
+        missing = FINDING_KEYS - set(finding)
+        unknown = set(finding) - FINDING_KEYS
+        require(not missing, f"Finding {number} missing required fields: {', '.join(sorted(missing))}")
+        require(not unknown, f"Finding {number} unknown fields: {', '.join(sorted(unknown))}")
         require(all(nonempty_string(value) for value in finding.values()), "Finding fields must be nonempty strings")
         require(finding["id"] == f"{reviewer}-{assignment['Round']}-{number}", "Invalid finding ID sequence")
         require(finding["severity"] in SEVERITIES, "Invalid severity")

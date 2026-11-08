@@ -98,6 +98,11 @@ Render the assignment as a JSON object with the contract's case-sensitive field
 names. Use consistent normalized POSIX paths without parent traversal; prefer
 absolute paths supplied by the host when available. Record the exact JSON sent,
 not a reconstruction from memory, so an operator can extract it for diagnostics.
+Before plan approval, spell directory roots without a trailing slash (for example,
+`/work/project`, not `/work/project/`); preserve `/` for the filesystem root.
+Check every path field, including DiscoveryRoots. If an approved assignment is
+invalid, stop and obtain a corrected plan in a new round; do not normalize the
+sent assignment afterward or silently change retry inputs.
 
 Persist the exact assignment, actual native dispatch/completion identifiers if
 available, and raw result/error in reviews/round-NN-<reviewer>-attempt-A.md, A 1
@@ -105,6 +110,11 @@ or 2. Store raw JSON in a fenced block in this Markdown artifact; do not replace
 it with an edited summary or write a .json file outside the agent's write policy.
 If the raw output contains secrets, stop, avoid copying secrets into artifacts,
 record that output was withheld and incomplete, and ask for sanitized inputs.
+Preserve the returned payload verbatim, including missing fields, whitespace, and
+key order; do not parse and reserialize it as the raw result. Keep native wrappers
+separate from the exact reviewer JSON payload. Choose a longer Markdown fence if
+the payload contains fences. Copy native session IDs directly from tool results,
+then compare them with the attempt artifact and stage log; never reconstruct IDs.
 
 Apply every result-validation checklist item before accepting a result. A wrong
 reviewer/target/revision/round/scope, malformed JSON, missing read coverage,
@@ -113,6 +123,17 @@ cannot count as completed coverage. Do not repair malformed JSON into a passing
 result or invent required reads. The Python reference validator is operator-only:
 Elephant has no shell/Code Mode permission to execute it. Runtime validation here
 is instruction-driven; disclose that limit rather than claiming machine enforcement.
+Before synthesis, persist a validation record for each attempt: assignment paths;
+native identity/completion and copied ID; JSON/top-level schema; assignment/result
+identity; required reads; finding fields/IDs/order/enums; and raw-copy comparison.
+For each check write pass/fail/unverified and concrete evidence or the failed
+field. For every finding explicitly check all seven fields, including certainty;
+no findings means that finding check is not applicable, not inferred from summary.
+Do not record a blanket "checklist passed" without these individual outcomes.
+Any failure prevents accepted coverage; an unverified mandatory check remains
+incomplete. Reread the saved raw block against the native payload before marking
+raw-copy comparison passed. Put any parent interpretation outside that block;
+never supply a missing certainty, severity, ID, or read on the reviewer's behalf.
 
 Retry a failed, timed-out, malformed, or incomplete assignment at most once in a
 fresh child, with the same approved inputs and no earlier findings. The initial
@@ -170,3 +191,13 @@ stop, authorize a bounded extension, or return to drafting. Never silently exten
 the cap, accept risks, or auto-advance. Earlier round approval does not authorize
 the next round. The user can stop after one round; report halted, not converged.
 Neither convergence nor stopping is implementation approval.
+
+## 6. Later evidence corrections
+
+If a later audit discovers altered raw output, wrong native IDs, or invalid
+coverage, preserve the sealed reports, snapshots, and original attempts. Write a
+separate dated erratum with native evidence references and update current state
+to point to it. Mark the affected coverage incomplete and reset the clean streak;
+retain findings as attributed historical claims, not validated conclusions or
+zero-findings passes. Do not manufacture a historical retry or rewrite an old
+report into a pass. Any new review needs a new approved plan and round.

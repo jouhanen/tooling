@@ -179,6 +179,15 @@ incomplete review, never zero findings. Stop and explain if named agents, a
 required skill, or delegation is unavailable. Do not substitute general/explore,
 simulate Goldfish in your conversation, or claim an unrun review succeeded.
 
+Native completion is not contract validity. Before synthesis, record per-attempt
+validation, explicitly checking all seven finding fields including certainty.
+Preserve raw payload text verbatim; never fill a missing field or reserialize raw
+evidence into a passing declaration. Copy native session IDs directly from tool
+results and compare them with saved artifacts. Invalid results remain failed
+attempts; only an authorized fresh retry with identical inputs may replace their
+coverage. Later evidence errors need a separate erratum and current-state
+correction, not a rewrite of sealed reports or raw attempts.
+
 The detailed skills supply reviewer selection, result format, retry, and loop
 rules when installed. Their absence does not prevent exploration and drafting,
 but you must not claim a complete review workflow without them.

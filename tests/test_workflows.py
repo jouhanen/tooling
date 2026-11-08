@@ -162,6 +162,30 @@ class WorkflowContractTests(unittest.TestCase):
                 result = validate_result(parse_json(example), task, reviewer)
                 self.assertEqual(result["status"], "incomplete")
 
+    def test_live_audit_repairs_are_explicit_prompt_contracts(self):
+        _, review = markdown(PACKAGE / "skills/egm-review/SKILL.md")
+        checklist = (PACKAGE / "resources/standards/result-validation.md").read_text(encoding="utf-8")
+        report = (PACKAGE / "resources/templates/review-round.md").read_text(encoding="utf-8")
+        _, elephant = markdown(PACKAGE / "agents/elephant.md")
+        for phrase in (
+            "without a trailing slash", "preserve `/`", "new round",
+            "payload verbatim", "whitespace", "key order", "raw-copy comparison",
+            "including certainty", "Copy native session IDs directly",
+            "separate dated erratum", "affected coverage incomplete",
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase.lower(), " ".join(review.split()).lower())
+        for phrase in ("Missing certainty is invalid", "pass/fail/unverified",
+                       "not a verbatim copy", "same child", "including DiscoveryRoots"):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase.lower(), " ".join(checklist.split()).lower())
+        for phrase in ("Per-attempt validation record", "seven fields", "verbatim",
+                       "copied session ID", "erratum"):
+            self.assertIn(phrase, report)
+        for phrase in ("Native completion is not contract validity", "including certainty",
+                       "raw payload text verbatim", "separate erratum"):
+            self.assertIn(phrase, " ".join(elephant.split()))
+
 
 if __name__ == "__main__":
     unittest.main()

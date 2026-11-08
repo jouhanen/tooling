@@ -13,11 +13,16 @@ cannot establish that a real model follows the review and approval protocol.
 | Native dispatch and sampled tool boundaries | Passed with scripted loopback model | All seven reviewer types, repeated fresh design reviewer, required fixture reads, selected denials |
 | Parent conversation boundary | Scoped marker probe passed | Captured child requests lacked a random parent-only marker; project instructions were inherited |
 | General context/filesystem/process isolation | Unverified; no sandbox provided | Shared local reads and host-injected context remain possible |
-| Live brainstorm/draft/review/resolve and approval pauses | Not run | Requires separate user authorization and a real human checkpoint |
+| Live brainstorm/draft/review/resolve and approval pauses | Partial; failures found | Human portfolio exercise audited; malformed-result acceptance and altered raw evidence; missing checkpoints remain |
 
 The [recorded run](verification/2026-11-04-native.md) identifies the exact tested
 payload and probe. Conclusions do not automatically apply to other OpenCode
 versions, models, profiles, policies, platforms, or modified prompts.
+
+The [live audit and erratum](verification/2026-11-08-live-audit.md) records the
+November 4–8 human exercise separately. Native child reads/completions were found,
+but runtime validation and evidence preservation failed. Source repairs are not
+live-verified merely because offline tests pass; full acceptance remains pending.
 
 ## 1. Offline checks
 

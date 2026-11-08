@@ -14,8 +14,10 @@ and review/validation contracts are authored, with offline checks and a read-onl
 operator validator. The project/global installer supports dry-run, owned-file
 updates, and conservative uninstall. Native discovery and sampled dispatch/tool
 boundaries passed scripted probes on OpenCode 2.2.5 in isolated project/global
-profiles. Live model compliance and human approval behavior remain unverified;
-start with a disposable project. See [verification](opencode/VERIFY.md) for scope
+profiles. A live human workflow exercise demonstrated approval pauses but exposed
+result-validation and raw-evidence preservation failures; full acceptance and live
+verification of the repairs remain pending. Start with a disposable project.
+See [verification](opencode/VERIFY.md) for scope
 and evidence, not a general isolation claim.
 
 The initial target is OpenCode **V2.2.5 on Linux, including WSL2**. This is a

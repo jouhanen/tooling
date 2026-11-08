@@ -38,6 +38,11 @@ strict JSON, assignment identity, required read declarations, target-only
 comprehension, finding fields/IDs/severity, malformed/incomplete results, and CLI
 exit codes without changing input files. The validator is not available as an
 Elephant tool and cannot prove native completion or actual reads.
+Live-audit regression cases specifically reject missing certainty on either
+finding without repairing it, reject trailing slashes in assignment/read paths
+while accepting `/`, and preserve malformed input bytes on CLI failure. Workflow
+text checks require explicit raw-copy, native-ID, validation-record, and erratum
+instructions; they do not establish that a real model obeys those instructions.
 
 `test_native_probe.py` uses synthetic contexts and in-memory scripted responses
 to check failed/missing native evidence, identity linkage, session reuse,
@@ -47,4 +52,6 @@ OpenCode or a model; it may bind a temporary loopback fixture socket.
 The ordinary suite makes no model calls and changes no live OpenCode configuration.
 It does not establish runtime enforcement or reviewer isolation. The optional
 native runner does invoke a private OpenCode server and its own scripted loopback
-provider. Live provider/model acceptance remains separately authorized and unrun.
+provider. A [partial live exercise](../opencode/verification/2026-11-08-live-audit.md)
+exposed validation/evidence failures; full acceptance of the repaired workflow
+remains separately authorized and pending.

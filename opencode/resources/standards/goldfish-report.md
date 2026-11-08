@@ -64,6 +64,10 @@ input. Multiple successful slice reads can truthfully be aggregated only after
 all content has been read. Partial coverage remains partial. Paths use normalized
 POSIX spelling without parent traversal; use consistent exact paths across the
 assignment, result, and evidence. This does not prove canonical filesystem identity.
+This applies to assignment paths too, including DiscoveryRoots. Directory paths
+have no trailing slash except `/` itself; `/work/project` is valid and
+`/work/project/` is not. Agree on this spelling before dispatch, not by rewriting
+the assignment or result afterward.
 
 Each finding contains exactly these fields:
 
@@ -89,3 +93,7 @@ the target, including when it fails to explain current behavior.
 Elephant preserves result provenance and assigns dispositions separately. Do not
 ask a reviewer to revise its conclusion to match another reviewer, and do not use
 this report as authority to edit the target or proceed to implementation.
+Missing finding fields are invalid, including certainty; Elephant must not infer
+and insert them. Preserve the exact returned payload separately from parent
+interpretation and record per-attempt validation before synthesis. Native tool
+completion does not by itself establish a valid declaration.

@@ -2,8 +2,9 @@
 
 This directory contains the personal Elephant/Goldfish workflow package. Use the
 opt-in installer rather than copying it over an existing OpenCode profile. Native
-discovery and sampled tool boundaries passed scripted 2.2.5 probes; live model
-workflow behavior remains unverified.
+discovery and sampled tool boundaries passed scripted 2.2.5 probes. A
+[live audit](verification/2026-11-08-live-audit.md) found partial workflow evidence
+and validation/evidence-preservation failures; full acceptance remains pending.
 
 ## Package boundaries
 
@@ -11,7 +12,7 @@ workflow behavior remains unverified.
 | --- | --- | --- |
 | `agents/elephant.md` | Persistent design discussion, drafting, and review coordination | Native discovery and sampled write/dispatch boundaries probed |
 | `agents/goldfish-*.md` | Fresh, specialized, read-only reviews | Native discovery/dispatch and sampled read/skill boundaries probed |
-| `skills/` | Brainstorm, draft, review, and resolve procedures | Native loading and resource reads probed; live behavior unverified |
+| `skills/` | Brainstorm, draft, review, and resolve procedures | Native loading and resource reads probed; partial live exercise exposed failures; repairs need live retest |
 | `commands/` | Explicit entry points selecting Elephant in the current session | Native selection and skill-loading paths probed |
 | `resources/templates/` | Concept, design, and durable review-state templates | Authored |
 | `resources/standards/` | Workflow, assignment/report, and validation contracts; substantive review lenses embedded in agents | Authored |
@@ -43,7 +44,8 @@ uninstall. It does not reconstruct the full effective host registry.
 [Offline checks](../tests/README.md) cover installation and workflow contracts.
 [Native probes](VERIFY.md) cover discovery and specific dispatch/tool boundaries
 on 2.2.5 with a scripted provider, not general enforcement or real model behavior.
-Live acceptance requires separate authorization.
+Further live acceptance requires separate authorization; the partial exercise is
+not a passing result or verification of the repaired payload.
 
 ## Elephant and artifacts
 

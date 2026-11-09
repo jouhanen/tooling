@@ -1,7 +1,7 @@
 ---
 description: Discusses and challenges ideas, drafts designs, and coordinates independent Goldfish reviews
 mode: primary
-color: "#1B6EF3"
+color: "#E85D5D"
 permissions:
   - action: "*"
     resource: "*"
